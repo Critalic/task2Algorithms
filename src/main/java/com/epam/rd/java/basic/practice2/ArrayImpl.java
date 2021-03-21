@@ -5,8 +5,17 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayImpl implements Array {
-    Object[] centralArray = new Object[10];
-    int lengthOfArray = centralArray.length;
+    Object[] centralArray;
+    int lengthOfArray ;
+
+    public ArrayImpl(int size) {
+       this.centralArray = new Object[size];
+       this.lengthOfArray= centralArray.length;
+    }
+    public ArrayImpl() {
+        this.centralArray = new Object[10];
+        this.lengthOfArray= centralArray.length;
+    }
 
 	@Override
     public void clear() {
@@ -46,7 +55,9 @@ public class ArrayImpl implements Array {
 
         @Override
         public Object next() {
-
+            if(array[numberOfElement-1]==null || numberOfElement>array.length) {
+                throw new NoSuchElementException("There is no such element");
+            }
             return array[numberOfElement-1];
         }
 
