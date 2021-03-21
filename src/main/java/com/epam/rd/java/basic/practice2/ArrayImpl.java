@@ -98,13 +98,19 @@ public class ArrayImpl implements Array {
             return answer;
         }
 
-        throw new NoSuchElementException("There is no such index in the array 2");
+        return null;
     }
 
     @Override
     public int indexOf(Object element) {
-        for(int i=0; i<lengthOfArray;i++) {
-            if(centralArray[i].equals(element)) return i;
+        try {
+            for (int i = 0; i < lengthOfArray; i++) {
+                if (centralArray[i].equals(element)) return i;
+            }
+        } catch (NullPointerException e) {
+            for(int i=0; i<lengthOfArray;i++) {
+                if(centralArray[i]==null) return i;
+            }
         }
         throw new NoSuchElementException("There is no such element in the array 3");
     }
@@ -123,7 +129,6 @@ public class ArrayImpl implements Array {
     @Override
     public String toString() {
         String answer;
-
         StringBuilder stringBuilder = new StringBuilder();
         int counter =0;
         for(int i=1; i<=actualLength; i++) {
@@ -151,11 +156,13 @@ public class ArrayImpl implements Array {
 
 
 
-        System.out.println(myArray.size() );
+        System.out.println(myArray.indexOf(null) );
         System.out.println(myArray.toString());
 
     }
 
 }
+
+
 
 
