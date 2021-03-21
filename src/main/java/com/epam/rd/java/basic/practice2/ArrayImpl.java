@@ -54,7 +54,7 @@ public class ArrayImpl implements Array {
 
         @Override
         public Object next() {
-            if(array[numberOfElement-1]==null || (numberOfElement-1)>=array.length) {
+            if(array[numberOfElement-1]==null || (numberOfElement-1)>array.length) {
                 throw new NoSuchElementException("There is no such element");
             }
             return array[numberOfElement-1];
@@ -89,7 +89,7 @@ public class ArrayImpl implements Array {
     public Object get(int index) {
         if(index<lengthOfArray) {
             Object answer =centralArray[index];
-
+            if(answer ==null) throw new NoSuchElementException("There is no such index in the array");
 
             return answer;
         }
@@ -122,7 +122,7 @@ public class ArrayImpl implements Array {
         IteratorImpl iterator = new IteratorImpl(centralArray);
         StringBuilder stringBuilder = new StringBuilder();
         int counter =0;
-        for(int i=0; i<actualLength; i++) {
+        while(iterator.hasNext()) {
             if(centralArray[counter+1] ==null) {
                 stringBuilder.append(centralArray[counter]);
                 break;
