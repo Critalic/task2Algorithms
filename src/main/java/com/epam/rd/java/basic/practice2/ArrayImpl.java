@@ -7,6 +7,7 @@ import java.util.NoSuchElementException;
 public class ArrayImpl implements Array {
     Object[] centralArray;
     int lengthOfArray ;
+    int actualLength =0;
 
     public ArrayImpl(int size) {
        this.centralArray = new Object[size];
@@ -25,10 +26,7 @@ public class ArrayImpl implements Array {
 
 	@Override
     public int size() {
-	    IteratorImpl iterator = new IteratorImpl(centralArray);
-        int counter=0;
-        while(iterator.hasNext()) counter++;
-        return counter;
+	    return actualLength;
     }
 	
 	@Override
@@ -69,6 +67,7 @@ public class ArrayImpl implements Array {
         for(int i=0; i<centralArray.length; i++) {
             if (!iterator.hasNext()) {
                 centralArray[i] = element;
+                actualLength++;
                 return;
             }
         }
@@ -80,8 +79,9 @@ public class ArrayImpl implements Array {
 
 	@Override
     public void set(int index, Object element) {
+        if(index>actualLength-1 && index<lengthOfArray) actualLength++;
 	    if(index<lengthOfArray) centralArray[index] = element;
-        else System.out.println("The given index is out of bonds");
+        else throw new IndexOutOfBoundsException("The given index is out of bounds");
     }
 
 	@Override
@@ -110,7 +110,8 @@ public class ArrayImpl implements Array {
             for (int i = index; i < lengthOfArray - 1; i++) {
                 centralArray[i] = centralArray[i + 1];
             }
-            centralArray[lengthOfArray - 1] = (char) 0;
+            centralArray[lengthOfArray - 1] = null;
+            actualLength--;
         } else System.out.println("Index is out of bonds of the array");
     }
 
@@ -135,11 +136,11 @@ public class ArrayImpl implements Array {
 
     public static void main(String[] args) {
         ArrayImpl myArray = new ArrayImpl();
-        myArray.add(2);
+        myArray.set(0,  'a');
         myArray.add("SDHOF");
         myArray.add('s');
         myArray.remove(1);
-        myArray.set(0, "s;duoufhgi");
+
 
         System.out.println(myArray.get(1));
         System.out.println(myArray.size());
