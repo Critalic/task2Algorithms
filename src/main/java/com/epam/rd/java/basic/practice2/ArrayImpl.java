@@ -6,38 +6,38 @@ import java.util.NoSuchElementException;
 
 public class ArrayImpl implements Array {
     Object[] centralArray;
-    int lengthOfArray ;
+    int lengthOfArray;
     int actualLength =0;
 
     public ArrayImpl(int size) {
-       this.centralArray = new Object[size];
-       this.lengthOfArray= centralArray.length;
+        this.centralArray = new Object[size];
+        this.lengthOfArray= centralArray.length;
     }
     public ArrayImpl() {
         this.centralArray = new Object[10];
         this.lengthOfArray= centralArray.length;
     }
 
-	@Override
+    @Override
     public void clear() {
-        Object[] a = new Object[10];
-        centralArray = a;
+        centralArray = new Object[10];
+
         actualLength=0;
     }
 
-	@Override
+    @Override
     public int size() {
-	    return actualLength;
+        return actualLength;
     }
-	
-	@Override
+
+    @Override
     public Iterator<Object> iterator() {
-	    return new IteratorImpl(centralArray);
+        return new IteratorImpl(centralArray);
     }
-	
-	private class IteratorImpl implements Iterator<Object> {
-	    private Object[] array;
-	    private int numberOfElement=0;
+
+    private class IteratorImpl implements Iterator<Object> {
+        private Object[] array;
+        private int numberOfElement=0;
 
         IteratorImpl(Object[] centralArray) {
             this.array=centralArray;
@@ -55,59 +55,63 @@ public class ArrayImpl implements Array {
         @Override
         public Object next() {
             if(array[numberOfElement-1]==null || (numberOfElement-1)>array.length) {
-                throw new NoSuchElementException("There is no such element");
+                throw new NoSuchElementException("There is no such element 0");
             }
             return array[numberOfElement-1];
         }
 
     }
-	
-	@Override
+
+    @Override
     public void add(Object element) {
-        IteratorImpl iterator = new IteratorImpl(centralArray);
-        for(int i=0; i<centralArray.length; i++) {
-            if (!iterator.hasNext()) {
-                centralArray[i] = element;
-                actualLength++;
-                return;
-            }
+        if(actualLength >= lengthOfArray-3) {
+            Object[] a = new Object[lengthOfArray*3];
+            System.arraycopy(centralArray, 0, a, 0, centralArray.length);
+            centralArray=a;
+
         }
-        Object[] a = new Object[lengthOfArray*3];
-        System.arraycopy(centralArray, 0, a, 0, centralArray.length);
-        centralArray=a;
-        add(element);
+        centralArray[actualLength] = element;
+        actualLength++;
+
     }
 
-	@Override
+    @Override
     public void set(int index, Object element) {
-        if(index>actualLength-1 && index<lengthOfArray) actualLength++;
-	    if(index<lengthOfArray) centralArray[index] = element;
+
+        if(index>actualLength-1 && index<lengthOfArray) {
+            if(actualLength >= lengthOfArray-3) {
+                Object[] a = new Object[lengthOfArray*3];
+                System.arraycopy(centralArray, 0, a, 0, centralArray.length);
+                centralArray=a;
+            }
+            actualLength++;
+        }
+        if(index<lengthOfArray) centralArray[index] = element;
         else throw new IndexOutOfBoundsException("The given index is out of bounds");
     }
 
-	@Override
+    @Override
     public Object get(int index) {
         if(index<lengthOfArray) {
             Object answer =centralArray[index];
-            if(answer ==null) throw new NoSuchElementException("There is no such index in the array");
-
+            if(answer ==null) throw new NoSuchElementException("There is no such index in the array 1");
             return answer;
         }
 
-        throw new NoSuchElementException("There is no such index in the array");
+        throw new NoSuchElementException("There is no such index in the array 2");
     }
 
-	@Override
+    @Override
     public int indexOf(Object element) {
         for(int i=0; i<lengthOfArray;i++) {
             if(centralArray[i].equals(element)) return i;
         }
-        throw new NoSuchElementException("There is no such element in the array");
+        throw new NoSuchElementException("There is no such element in the array 3");
     }
 
-	@Override
+    @Override
     public void remove(int index) {
-	    if(index<lengthOfArray) {
+        if(index<lengthOfArray) {
             for (int i = index; i < lengthOfArray - 1; i++) {
                 centralArray[i] = centralArray[i + 1];
             }
@@ -119,11 +123,11 @@ public class ArrayImpl implements Array {
     @Override
     public String toString() {
         String answer;
-        IteratorImpl iterator = new IteratorImpl(centralArray);
+
         StringBuilder stringBuilder = new StringBuilder();
         int counter =0;
-        while(iterator.hasNext()) {
-            if(centralArray[counter+1] ==null) {
+        for(int i=1; i<=actualLength; i++) {
+            if((counter) ==actualLength-1) {
                 stringBuilder.append(centralArray[counter]);
                 break;
             }
@@ -131,22 +135,27 @@ public class ArrayImpl implements Array {
             counter++;
         }
         answer = stringBuilder.toString();
+
         return answer;
 
     }
 
     public static void main(String[] args) {
         ArrayImpl myArray = new ArrayImpl();
-        myArray.set(0,  'a');
+        myArray.add( null);
         myArray.add("SDHOF");
+        myArray.add(9);
+        myArray.add('s');
         myArray.add('s');
         myArray.remove(1);
-        myArray.clear();
 
 
-        System.out.println(myArray.size());
+
+        System.out.println(myArray.size() );
         System.out.println(myArray.toString());
 
     }
 
 }
+
+
