@@ -1,24 +1,20 @@
 package com.epam.rd.java.basic.practice2;
 
-
-
-
-
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class ArrayImpl implements Array {
     Object[] centralArray;
-    int lengthOfArray;
+
     int actualLength =0;
 
     public ArrayImpl(int size) {
         this.centralArray = new Object[size];
-        this.lengthOfArray= centralArray.length;
+
     }
     public ArrayImpl() {
-        this.centralArray = new Object[10];
-        this.lengthOfArray= centralArray.length;
+        this.centralArray = new Object[1];
+
     }
 
     @Override
@@ -67,8 +63,8 @@ public class ArrayImpl implements Array {
 
     @Override
     public void add(Object element) {
-        if(actualLength >= lengthOfArray-3) {
-            Object[] a = new Object[lengthOfArray*3];
+        if(actualLength >= centralArray.length/2) {
+            Object[] a = new Object[centralArray.length*3];
             System.arraycopy(centralArray, 0, a, 0, centralArray.length);
             centralArray=a;
 
@@ -81,22 +77,22 @@ public class ArrayImpl implements Array {
     @Override
     public void set(int index, Object element) {
 
-        if(index>actualLength-1 && index<lengthOfArray) {
-            if(actualLength >= lengthOfArray-3) {
-                Object[] a = new Object[lengthOfArray*3];
+        if(index>actualLength-1 && index<centralArray.length) {
+            if(actualLength >= centralArray.length-3) {
+                Object[] a = new Object[centralArray.length*3];
                 System.arraycopy(centralArray, 0, a, 0, centralArray.length);
                 centralArray=a;
             }
             actualLength++;
         }
-        if(index<lengthOfArray) centralArray[index] = element;
+        if(index<centralArray.length) centralArray[index] = element;
         else throw new IndexOutOfBoundsException("The given index is out of bounds");
     }
 
     @Override
     public Object get(int index) {
 
-        if(index<lengthOfArray) {
+        if(index<centralArray.length) {
             Object answer =centralArray[index];
             return answer;
         }
@@ -114,7 +110,7 @@ public class ArrayImpl implements Array {
             }
 
         } catch (NullPointerException e) {
-            for(int i=0; i<lengthOfArray;i++) {
+            for(int i=0; i<centralArray.length;i++) {
                 if(centralArray[i]==null) return i;
             }
         }
@@ -123,11 +119,11 @@ public class ArrayImpl implements Array {
 
     @Override
     public void remove(int index) {
-        if(index<lengthOfArray) {
-            for (int i = index; i < lengthOfArray - 1; i++) {
+        if(index<centralArray.length) {
+            for (int i = index; i < centralArray.length - 1; i++) {
                 centralArray[i] = centralArray[i + 1];
             }
-            centralArray[lengthOfArray - 1] = null;
+            centralArray[centralArray.length - 1] = null;
             actualLength--;
         } else System.out.println("Index is out of bonds of the array");
     }
