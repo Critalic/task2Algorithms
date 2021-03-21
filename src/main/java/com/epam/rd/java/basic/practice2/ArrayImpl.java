@@ -1,6 +1,9 @@
 package com.epam.rd.java.basic.practice2;
 
 
+
+
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -92,27 +95,30 @@ public class ArrayImpl implements Array {
 
     @Override
     public Object get(int index) {
+
         if(index<lengthOfArray) {
             Object answer =centralArray[index];
-            if(answer ==null) throw new NoSuchElementException("There is no such index in the array 1");
             return answer;
         }
-
         return null;
+
     }
 
     @Override
     public int indexOf(Object element) {
+
         try {
-            for (int i = 0; i < lengthOfArray; i++) {
-                if (centralArray[i].equals(element)) return i;
+            for (int i = 0; i <=actualLength; i++) {
+
+                if (element.equals(centralArray[i])) return i;
             }
+
         } catch (NullPointerException e) {
             for(int i=0; i<lengthOfArray;i++) {
                 if(centralArray[i]==null) return i;
             }
         }
-        throw new NoSuchElementException("There is no such element in the array 3");
+        return -1;
     }
 
     @Override
@@ -147,21 +153,30 @@ public class ArrayImpl implements Array {
 
     public static void main(String[] args) {
         ArrayImpl myArray = new ArrayImpl();
-        myArray.add( null);
-        myArray.add("SDHOF");
-        myArray.add(9);
-        myArray.add('s');
-        myArray.add('s');
-        myArray.remove(1);
+        myArray.add( "A");
+        myArray.add("B");
+        myArray.add("C");
+        myArray.add(null);
+        myArray.add("D");
+        myArray.add("E");
+
+        for(int i=0 ; i< myArray.actualLength; i++) {
+
+            System.out.println(myArray.indexOf(myArray.get(i)));
+        }
+
+        System.out.println(myArray.get(5));
 
 
-
-        System.out.println(myArray.indexOf(null) );
         System.out.println(myArray.toString());
-
+        System.out.println(myArray.size());
     }
 
 }
+
+
+
+
 
 
 
