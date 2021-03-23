@@ -7,7 +7,7 @@ public class ListImpl implements List {
     private MyNode tail;
     private int size =0;
 
-    ListImpl() {
+    public ListImpl() {
         this.head = new MyNode();
         this.tail = new MyNode();
         head.next = tail;
@@ -56,7 +56,7 @@ public class ListImpl implements List {
 
     private class IteratorImpl implements Iterator<Object> {
         private int numberOfIteration=0;
-        private ListImpl list;
+        private final ListImpl list;
         protected IteratorImpl(ListImpl list) {
             this.list=list;
         }
@@ -82,7 +82,7 @@ public class ListImpl implements List {
             for(int i=0; i>=numberOfIteration; i++) {
                 current = current.next;
                 if(i==numberOfIteration) {
-                    return current;
+                    return current.value;
                 }
             }
             return null;
@@ -92,7 +92,12 @@ public class ListImpl implements List {
 
     @Override
     public void addFirst(Object element) {
-        if(head.equals((char)0)) head.value = element; // if head is empty (lol)
+        if(element == null) {
+            element="null";
+        }
+        if(head.value.equals((char)0)) {
+            head.value = element; // if head is empty (lol)
+        }
         else {
             MyNode node = new MyNode(element);
             node.next = head;
@@ -103,7 +108,18 @@ public class ListImpl implements List {
 
     @Override
     public void addLast(Object element) {
-        if(tail.value.equals((char)(0))) tail.value = element; // if tail is empty
+        if(element == null) {
+            element="null";
+        }
+        if(head.value.equals((char)(0))) {
+            addFirst(element);
+
+            return;
+        }
+        else if(tail.value.equals((char)(0))) {
+            tail.value = element; // if tail is empty
+
+        }
         else {
             MyNode node = new MyNode(element);
             tail.next = node;
@@ -123,15 +139,13 @@ public class ListImpl implements List {
 
     @Override
     public void removeLast() {
-        if(tail.equals((char)0)) return;
-        else {
-            MyNode current = head;
-            for(int i=0; i<size-1; i++) {
-                current = head.next;
-            }
-            tail = current;
-            size--;
+        MyNode current = head;
+        for(int i=0; i<size-2; i++) {
+            current = head.next;
         }
+        tail = current;
+
+        size--;
     }
 
     @Override
@@ -146,6 +160,17 @@ public class ListImpl implements List {
 
     @Override
     public Object search(Object element) {
+        IteratorImpl iterator = new IteratorImpl(this);
+        MyNode current = head;
+        for(int i=0; i<size; i++) {
+            if(current.value.equals(element) ) {
+                return current;
+
+            }
+
+            current = current.next;
+
+        }
         return null;
     }
 
@@ -180,14 +205,16 @@ public class ListImpl implements List {
 
     public static void main(String[] args) {
         ListImpl myList = new ListImpl();
-        myList.addFirst('a');
-        myList.addFirst(null);
-        myList.addFirst('r');
-        myList.clear();
-        myList.addFirst('a');
+        myList.addLast(null);
+        myList.addLast('a');
+        myList.addLast('5');
+
+        myList.addLast('g');
+        myList.addLast('a');
         myList.addLast('6');
         myList.removeLast();
-        System.out.print(myList.toString());
+        System.out.println(myList.toString());
+        System.out.println(myList.search('6'));
         System.out.println(myList.size());
     }
 }
