@@ -93,8 +93,8 @@ public class ArrayImpl implements Array {
     public Object get(int index) {
 
         if(index<centralArray.length) {
-            Object answer =centralArray[index];
-            return answer;
+            return centralArray[index];
+
         }
         return null;
 
