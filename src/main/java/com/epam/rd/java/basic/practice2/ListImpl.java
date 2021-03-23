@@ -1,6 +1,7 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class ListImpl implements List {
     private MyNode head;
@@ -32,7 +33,7 @@ public class ListImpl implements List {
 
     private class MyNode {
         Object value;
-        public MyNode next;
+        private MyNode next;
 
         MyNode(Object value) {
             this.value = value;
@@ -63,13 +64,13 @@ public class ListImpl implements List {
         @Override
         public boolean hasNext() {
             MyNode current = list.head;
-            for(int i=0; i>=numberOfIteration; i++) {
+            for(int i=0; i<=numberOfIteration; i++) {
                 current = current.next;
-                if(i==numberOfIteration) {
-                    if(!current.equals ((char)0)) {
-                        numberOfIteration++;
-                        return true;
-                    }
+                if(i==numberOfIteration && !current.equals ((char)0)) {
+
+                    numberOfIteration++;
+                    return true;
+
                 }
             }
             numberOfIteration++;
@@ -79,12 +80,13 @@ public class ListImpl implements List {
         @Override
         public Object next() {
             MyNode current = list.head;
-            for(int i=0; i>=numberOfIteration; i++) {
+            for(int i=0; i<=numberOfIteration; i++) {
                 current = current.next;
                 if(i==numberOfIteration) {
-                    return current.value;
+                    return current.value.toString();
                 }
             }
+            throw new NoSuchElementException("Iteration beyond the end of the collection")
             return null;
         }
 
@@ -130,7 +132,7 @@ public class ListImpl implements List {
 
     @Override
     public void removeFirst() {
-        if(head.value.equals((char)0)) return; // if head is empty (lol) there is nothing to remove
+        if(head.value.equals((char)0)) ; // if head is empty (lol) there is nothing to remove
         else {
             head = head.next;
             size--;
@@ -239,9 +241,7 @@ public class ListImpl implements List {
         System.out.println(myList.getLast());
         myList.removeLast();
         System.out.println(myList.getLast());
-//        System.out.println(myList.toString());
-//        System.out.println(myList.search('g'));
-//        System.out.println(myList.size());
+
     }
 }
 

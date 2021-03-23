@@ -54,9 +54,9 @@ public class ArrayImpl implements Array {
         @Override
         public Object next() {
             if(array[numberOfElement-1]==null || (numberOfElement-1)>array.length) {
-                throw new NoSuchElementException("There is no such element 0");
+                return null;
             }
-            return array[numberOfElement-1];
+            return array[numberOfElement-1].toString();
         }
 
     }
