@@ -160,7 +160,7 @@ public class ListImpl implements List {
 
     @Override
     public Object search(Object element) {
-        IteratorImpl iterator = new IteratorImpl(this);
+
         MyNode current = head;
         for(int i=0; i<size; i++) {
             if(current.value.equals(element) ) {
@@ -187,9 +187,11 @@ public class ListImpl implements List {
             removeLast();
             return true;
         }
-        else if(this.search(element) ==null) return false;
+        else if(this.search(element) ==null) {
+            return false;
+        }
         else {
-            MyNode current = this.head;
+            MyNode current = head;
             for(int i=0; i<size; i++) {
                 if(current.value.equals(element) ) {
                     current.next = current.next.next;
@@ -214,10 +216,10 @@ public class ListImpl implements List {
         while(current != null) {
             //Prints each node by incrementing pointer
             if(counter == size-1) {
-                builder.append(current);
+                builder.append(current.value);
                 break;
             }
-            builder.append(current + ", ");
+            builder.append(current.value + ", ");
             current = current.next;
             counter++;
         }
@@ -234,7 +236,7 @@ public class ListImpl implements List {
         myList.addLast('g');
         myList.addLast('a');
         myList.addLast('6');
-        System.out.println(myList.remove('g'));
+        System.out.println(myList.remove('5'));
         System.out.println(myList.toString());
         System.out.println(myList.search('g'));
         System.out.println(myList.size());
