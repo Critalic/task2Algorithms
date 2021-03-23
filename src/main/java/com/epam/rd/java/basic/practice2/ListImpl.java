@@ -86,7 +86,7 @@ public class ListImpl implements List {
                     return current.value.toString();
                 }
             }
-            throw new NoSuchElementException("Iteration beyond the end of the collection")
+
             return null;
         }
 
