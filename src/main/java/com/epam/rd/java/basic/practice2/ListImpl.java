@@ -176,7 +176,29 @@ public class ListImpl implements List {
 
     @Override
     public boolean remove(Object element) {
-        return false;
+        if(element == null) {
+            element="null";
+        }
+        if(head.value.equals(element)) {
+            removeFirst();
+            return true;
+        }
+        else if(tail.value.equals(element)) {
+            removeLast();
+            return true;
+        }
+        else if(this.search(element) ==null) return false;
+        else {
+            MyNode current = this.head;
+            for(int i=0; i<size; i++) {
+                if(current.value.equals(element) ) {
+                    current.next = current.next.next;
+                    System.out.println("found");
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     @Override
@@ -195,7 +217,7 @@ public class ListImpl implements List {
                 builder.append(current);
                 break;
             }
-            builder.append(current + " ");
+            builder.append(current + ", ");
             current = current.next;
             counter++;
         }
@@ -212,9 +234,9 @@ public class ListImpl implements List {
         myList.addLast('g');
         myList.addLast('a');
         myList.addLast('6');
-        myList.removeLast();
+        System.out.println(myList.remove('g'));
         System.out.println(myList.toString());
-        System.out.println(myList.search('6'));
+        System.out.println(myList.search('g'));
         System.out.println(myList.size());
     }
 }
