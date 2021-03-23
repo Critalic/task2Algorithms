@@ -150,12 +150,12 @@ public class ListImpl implements List {
 
     @Override
     public Object getFirst() {
-        return head;
+        return head.value;
     }
 
     @Override
     public Object getLast() {
-        return tail;
+        return tail.value;
     }
 
     @Override
