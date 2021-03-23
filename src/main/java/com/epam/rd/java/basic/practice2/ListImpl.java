@@ -164,7 +164,7 @@ public class ListImpl implements List {
         MyNode current = head;
         for(int i=0; i<size; i++) {
             if(current.value.equals(element) ) {
-                return current;
+                return current.value;
 
             }
 
@@ -230,16 +230,18 @@ public class ListImpl implements List {
     public static void main(String[] args) {
         ListImpl myList = new ListImpl();
         myList.addLast(null);
-        myList.addLast('a');
+        myList.addLast("A");
         myList.addLast('5');
 
         myList.addLast('g');
         myList.addLast('a');
         myList.addLast('6');
-        System.out.println(myList.remove('5'));
-        System.out.println(myList.toString());
-        System.out.println(myList.search('g'));
-        System.out.println(myList.size());
+        System.out.println(myList.getLast());
+        myList.removeLast();
+        System.out.println(myList.getLast());
+//        System.out.println(myList.toString());
+//        System.out.println(myList.search('g'));
+//        System.out.println(myList.size());
     }
 }
 
