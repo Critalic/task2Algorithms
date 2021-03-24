@@ -80,15 +80,20 @@ public class ListImpl implements List {
 
         @Override
         public Object next() {
-            if(numberOfIteration>size) throw new NoSuchElementException("Iteration beyond the end of the collection");
-            MyNode current = list.head;
-            for(int i=0; i<=numberOfIteration; i++) {
-                current = current.next;
-                if(i==numberOfIteration) {
-                    return current.value.toString();
+            try {
+                if(numberOfIteration>size) throw new NoSuchElementException("Iteration beyond the end of the collection");
+                MyNode current = list.head;
+                for(int i=0; i<=numberOfIteration; i++) {
+                    current = current.next;
+                    if(i==numberOfIteration) {
+                        return current.value.toString();
+                    }
                 }
+                return "null";
+            } catch (NullPointerException e) {
+                return ("[" + null + "]");
             }
-            return "null";
+
         }
 
     }

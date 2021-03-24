@@ -84,11 +84,21 @@ public class QueueImpl implements Queue {
 
     @Override
     public Object dequeue() {
-        if(head.data ==null) return null;
-        else {
-            return head.data.toString();
+        Node toReturn = head;
+        if (head != null) {
+
+            head = head.next;
+            head.prev = null;
+            count--;
         }
+        if (head.equals(tail)) {
+            tail = null;
+            count--;
+        }
+        return toReturn;
+
     }
+
 
     @Override
     public Object top() {
