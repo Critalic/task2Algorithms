@@ -94,10 +94,11 @@ public class ArrayImpl implements Array {
     public Object get(int index) {
 
         if(index<centralArray.length) {
+
             return centralArray[index];
 
         }
-        return null;
+        return -1;
 
     }
 
@@ -156,22 +157,13 @@ public class ArrayImpl implements Array {
     public static void main(String[] args) {
         ArrayImpl myArray = new ArrayImpl();
         myArray.add( "A");
-        myArray.add(null);
+
+        myArray.add("B");
+
         myArray.add("C");
         myArray.add(null);
-        myArray.add("D");
-        myArray.add("E");
 
-        for(int i=0 ; i< myArray.actualLength; i++) {
-
-            System.out.println(myArray.indexOf(myArray.get(i)));
-        }
-
-        System.out.println(myArray.get(5));
-
-
-        System.out.println(myArray.toString());
-        System.out.println(myArray.size());
+        System.out.println(myArray.get(10) );
     }
 
 }
