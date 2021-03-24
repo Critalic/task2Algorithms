@@ -1,6 +1,7 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 
 public class ListImpl implements List {
@@ -79,6 +80,7 @@ public class ListImpl implements List {
 
         @Override
         public Object next() {
+            if(numberOfIteration>size) throw new NoSuchElementException("Iteration beyond the end of the collection");
             MyNode current = list.head;
             for(int i=0; i<=numberOfIteration; i++) {
                 current = current.next;
@@ -229,7 +231,7 @@ public class ListImpl implements List {
             counter++;
         }
         answer = builder.toString();
-        return answer;
+        return "["+ answer+"]";
     }
 
     public static void main(String[] args) {

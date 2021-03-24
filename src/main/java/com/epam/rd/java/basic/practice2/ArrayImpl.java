@@ -149,7 +149,7 @@ public class ArrayImpl implements Array {
         }
         answer = stringBuilder.toString();
 
-        return answer;
+        return "["+ answer+"]";
 
     }
 

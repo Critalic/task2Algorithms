@@ -84,20 +84,10 @@ public class QueueImpl implements Queue {
 
     @Override
     public Object dequeue() {
-        if (head != null) {
-            head = head.next;
-            head.prev = null;
-
-            if (head.equals(tail)) {
-                tail = null;
-            }
-
-            if (count > 0) {
-                count--;
-            }
+        if(head.data ==null) return null;
+        else {
+            return head.data.toString();
         }
-
-        return true;
     }
 
     @Override
@@ -113,20 +103,22 @@ public class QueueImpl implements Queue {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
         Node newNode = head;
-
+        StringBuilder strbuilder = new StringBuilder();
+        int iteration =0;
         while (newNode != null) {
-            builder.append(newNode.data.toString());
+            if(iteration==count-1) {
+                strbuilder.append(newNode.data.toString() );
+                break;
+            }
+            strbuilder.append(newNode.data.toString() + ", ");
 
             newNode = newNode.next;
 
-            if (newNode != null) {
-                builder.append(", ");
-            }
+            iteration++;
         }
 
-        return "[" + builder.toString() + "]";
+        return "[" + strbuilder.toString() + "]";
     }
 
     public static void main(String[] args) {
@@ -137,7 +129,7 @@ public class QueueImpl implements Queue {
         System.out.println("After enqueue:");
         System.out.println(queue.size());
 
-        queue.enqueue("new elem");
+        queue.enqueue(null);
         System.out.println("After enqueue:");
         System.out.println(queue);
 
