@@ -56,7 +56,7 @@ public class ArrayImpl implements Array {
             if( (numberOfElement-1)>array.length) {
                 throw new NoSuchElementException("Iteration beyond the end of the collection");
             }
-            if(array[numberOfElement-1]==null ) return null;
+            if(array[numberOfElement-1]==null ) return "null";
             return array[numberOfElement-1].toString();
         }
 
@@ -134,12 +134,17 @@ public class ArrayImpl implements Array {
         String answer;
         StringBuilder stringBuilder = new StringBuilder();
         int counter =0;
+        String keeper;
         for(int i=1; i<=actualLength; i++) {
+            if(centralArray[counter] ==null) {
+                centralArray[counter] = "null";
+            }
+            keeper = centralArray[counter].toString();
             if((counter) ==actualLength-1) {
-                stringBuilder.append(centralArray[counter].toString());
+                stringBuilder.append(keeper);
                 break;
             }
-            stringBuilder.append(centralArray[counter].toString()+", ");
+            stringBuilder.append(keeper+", ");
             counter++;
         }
         answer = stringBuilder.toString();
@@ -151,7 +156,7 @@ public class ArrayImpl implements Array {
     public static void main(String[] args) {
         ArrayImpl myArray = new ArrayImpl();
         myArray.add( "A");
-        myArray.add("B");
+        myArray.add(null);
         myArray.add("C");
         myArray.add(null);
         myArray.add("D");

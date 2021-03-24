@@ -1,7 +1,7 @@
 package com.epam.rd.java.basic.practice2;
 
 import java.util.Iterator;
-import java.util.NoSuchElementException;
+
 
 public class ListImpl implements List {
     private MyNode head;
@@ -86,7 +86,7 @@ public class ListImpl implements List {
                     return current.value.toString();
                 }
             }
-            throw new NoSuchElementException("Iterating beyond the limits of the list");
+            return "null";
         }
 
     }
