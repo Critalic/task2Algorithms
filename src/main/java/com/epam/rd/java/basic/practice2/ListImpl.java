@@ -86,8 +86,7 @@ public class ListImpl implements List {
                     return current.value.toString();
                 }
             }
-
-            return null;
+            throw new NoSuchElementException("Iterating beyond the limits of the list");
         }
 
     }
@@ -132,7 +131,7 @@ public class ListImpl implements List {
 
     @Override
     public void removeFirst() {
-        if(head.value.equals((char)0)) ; // if head is empty (lol) there is nothing to remove
+        if(head.value.equals((char)0)) return; // if head is empty (lol) there is nothing to remove
         else {
             head = head.next;
             size--;
@@ -143,8 +142,9 @@ public class ListImpl implements List {
     public void removeLast() {
         MyNode current = head;
         for(int i=0; i<size-2; i++) {
-            current = head.next;
+            current = current.next;
         }
+
         tail = current;
 
         size--;
@@ -152,12 +152,14 @@ public class ListImpl implements List {
 
     @Override
     public Object getFirst() {
-        return head.value;
+        if(head.value.equals((char)0)) return null;
+        else return head.value.toString();
     }
 
     @Override
     public Object getLast() {
-        return tail.value;
+        if(tail.value.equals((char)0)) return null;
+        else return tail.value.toString();
     }
 
     @Override
@@ -200,6 +202,7 @@ public class ListImpl implements List {
                     System.out.println("found");
                     return true;
                 }
+                current = current.next;
             }
             return false;
         }
@@ -233,13 +236,13 @@ public class ListImpl implements List {
         ListImpl myList = new ListImpl();
         myList.addLast(null);
         myList.addLast("A");
-        myList.addLast('5');
+        myList.addLast("B");
 
-        myList.addLast('g');
-        myList.addLast('a');
-        myList.addLast('6');
+        myList.addLast("C");
+        System.out.println(myList.toString());
         System.out.println(myList.getLast());
-        myList.removeLast();
+        myList.remove("C");
+        System.out.println(myList.toString());
         System.out.println(myList.getLast());
 
     }

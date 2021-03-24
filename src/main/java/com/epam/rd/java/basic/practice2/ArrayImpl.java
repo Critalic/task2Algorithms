@@ -54,7 +54,7 @@ public class ArrayImpl implements Array {
         @Override
         public Object next() {
             if(array[numberOfElement-1]==null || (numberOfElement-1)>array.length) {
-                return null;
+                throw new NoSuchElementException("Iteration beyond the end of the collection");
             }
             return array[numberOfElement-1].toString();
         }
