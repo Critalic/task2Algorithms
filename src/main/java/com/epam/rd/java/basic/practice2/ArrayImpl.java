@@ -56,7 +56,7 @@ public class ArrayImpl implements Array {
             if( (numberOfElement-1)>array.length) {
                 throw new NoSuchElementException("Iteration beyond the end of the collection");
             }
-            if(array[numberOfElement-1]==null ) return "null";
+            if(array[numberOfElement-1]==null ) return "[" +null + "]";
             return array[numberOfElement-1].toString();
         }
 

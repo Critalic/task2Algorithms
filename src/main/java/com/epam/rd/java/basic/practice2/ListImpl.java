@@ -155,13 +155,13 @@ public class ListImpl implements List {
     @Override
     public Object getFirst() {
         if(head.value.equals((char)0)) return null;
-        else return head.value.toString();
+        else return head.value;
     }
 
     @Override
     public Object getLast() {
         if(tail.value.equals((char)0)) return null;
-        else return tail.value.toString();
+        else return tail.value;
     }
 
     @Override
