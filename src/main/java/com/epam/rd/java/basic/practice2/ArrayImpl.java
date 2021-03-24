@@ -53,9 +53,10 @@ public class ArrayImpl implements Array {
 
         @Override
         public Object next() {
-            if(array[numberOfElement-1]==null || (numberOfElement-1)>array.length) {
+            if( (numberOfElement-1)>array.length) {
                 throw new NoSuchElementException("Iteration beyond the end of the collection");
             }
+            if(array[numberOfElement-1]==null ) return null;
             return array[numberOfElement-1].toString();
         }
 
@@ -135,10 +136,10 @@ public class ArrayImpl implements Array {
         int counter =0;
         for(int i=1; i<=actualLength; i++) {
             if((counter) ==actualLength-1) {
-                stringBuilder.append(centralArray[counter]);
+                stringBuilder.append(centralArray[counter].toString());
                 break;
             }
-            stringBuilder.append(centralArray[counter]+", ");
+            stringBuilder.append(centralArray[counter].toString()+", ");
             counter++;
         }
         answer = stringBuilder.toString();

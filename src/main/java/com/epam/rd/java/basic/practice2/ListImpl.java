@@ -221,10 +221,10 @@ public class ListImpl implements List {
         while(current != null) {
             //Prints each node by incrementing pointer
             if(counter == size-1) {
-                builder.append(current.value);
+                builder.append(current.value.toString());
                 break;
             }
-            builder.append(current.value + ", ");
+            builder.append(current.value.toString() + ", ");
             current = current.next;
             counter++;
         }
